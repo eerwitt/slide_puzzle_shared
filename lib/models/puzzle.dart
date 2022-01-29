@@ -201,4 +201,12 @@ class Puzzle extends Equatable {
 
   @override
   List<Object> get props => [tiles];
+
+  factory Puzzle.fromJson(Map<String, dynamic> json) => Puzzle(
+        tiles: List<Tile>.from(json["tiles"].map((x) => Tile.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "tiles": List<dynamic>.from(tiles.map((x) => x.toJson())),
+      };
 }

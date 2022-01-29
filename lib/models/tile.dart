@@ -43,4 +43,18 @@ class Tile extends Equatable {
         currentPosition,
         isWhitespace,
       ];
+
+  factory Tile.fromJson(Map<String, dynamic> json) => Tile(
+        value: json["value"],
+        correctPosition: Position.fromJson(json["correctPosition"]),
+        currentPosition: Position.fromJson(json["currentPosition"]),
+        isWhitespace: json["isWhitespace"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "value": value,
+        "correctPosition": correctPosition.toJson(),
+        "currentPosition": currentPosition.toJson(),
+        "isWhitespace": isWhitespace,
+      };
 }

@@ -4,13 +4,15 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../models/models.dart';
+import 'package:slide_puzzle_shared/models/puzzle.dart';
+import 'package:slide_puzzle_shared/models/tile.dart';
+import 'package:slide_puzzle_shared/models/position.dart';
 
 part 'puzzle_event.dart';
 part 'puzzle_state.dart';
 
 class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
-  PuzzleBloc(this._size, {this.random}) : super(const PuzzleState()) {
+  PuzzleBloc(this._size) : super(const PuzzleState()) {
     on<PuzzleInitialized>(_onPuzzleInitialized);
     on<TileTapped>(_onTileTapped);
     on<PuzzleReset>(_onPuzzleReset);
@@ -18,13 +20,16 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
 
   final int _size;
 
-  final Random? random;
+  late final int randomSeed;
 
   void _onPuzzleInitialized(
     PuzzleInitialized event,
     Emitter<PuzzleState> emit,
   ) {
-    final puzzle = _generatePuzzle(_size, shuffle: event.shufflePuzzle);
+    randomSeed = event.randomSeed;
+
+    final puzzle = _generatePuzzle(_size, Random(randomSeed),
+        shuffle: event.shufflePuzzle);
     emit(
       PuzzleState(
         puzzle: puzzle.sort(),
@@ -73,8 +78,9 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
     }
   }
 
+  // NOTE: reusing random seed so same puzzle is getting generated.
   void _onPuzzleReset(PuzzleReset event, Emitter<PuzzleState> emit) {
-    final puzzle = _generatePuzzle(_size);
+    final puzzle = _generatePuzzle(_size, Random(randomSeed));
     emit(
       PuzzleState(
         puzzle: puzzle.sort(),
@@ -84,7 +90,7 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
   }
 
   /// Build a randomized, solvable puzzle of the given size.
-  Puzzle _generatePuzzle(int size, {bool shuffle = true}) {
+  Puzzle _generatePuzzle(int size, Random random, {bool shuffle = true}) {
     final correctPositions = <Position>[];
     final currentPositions = <Position>[];
     final whitespacePosition = Position(x: size, y: size);
