@@ -4,9 +4,9 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:slide_puzzle_shared/models/puzzle.dart';
-import 'package:slide_puzzle_shared/models/tile.dart';
-import 'package:slide_puzzle_shared/models/position.dart';
+import '../models/puzzle.dart';
+import '../models/tile.dart';
+import '../models/position.dart';
 
 part 'puzzle_event.dart';
 part 'puzzle_state.dart';
