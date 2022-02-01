@@ -9,25 +9,30 @@ abstract class PuzzleEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class PuzzleInitialized extends PuzzleEvent {
-  const PuzzleInitialized(
-      {required this.shufflePuzzle, required this.randomSeed});
+/// Initialize or reset a puzzle.
+class PuzzleSetup extends PuzzleEvent {
+  const PuzzleSetup(
+      {required this.shufflePuzzle,
+      required this.randomSeed,
+      required this.size});
 
   final bool shufflePuzzle;
   final int randomSeed;
+  final int size;
 
   @override
-  List<Object> get props => [shufflePuzzle, randomSeed];
+  List<Object> get props => [shufflePuzzle, randomSeed, size];
 
-  factory PuzzleInitialized.fromJson(Map<String, dynamic> json) =>
-      PuzzleInitialized(
+  factory PuzzleSetup.fromJson(Map<String, dynamic> json) => PuzzleSetup(
         shufflePuzzle: json["shufflePuzzle"],
         randomSeed: json["randomSeed"],
+        size: json["size"],
       );
 
   Map<String, dynamic> toJson() => {
         "shufflePuzzle": shufflePuzzle,
         "randomSeed": randomSeed,
+        "size": size,
       };
 }
 
@@ -45,8 +50,4 @@ class TileTapped extends PuzzleEvent {
   Map<String, dynamic> toJson() => {
         "tile": tile.toJson(),
       };
-}
-
-class PuzzleReset extends PuzzleEvent {
-  const PuzzleReset();
 }

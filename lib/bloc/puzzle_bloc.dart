@@ -12,23 +12,17 @@ part 'puzzle_event.dart';
 part 'puzzle_state.dart';
 
 class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
-  PuzzleBloc(this._size) : super(const PuzzleState()) {
-    on<PuzzleInitialized>(_onPuzzleInitialized);
+  PuzzleBloc() : super(const PuzzleState()) {
+    on<PuzzleSetup>(_onPuzzleSetup);
     on<TileTapped>(_onTileTapped);
-    on<PuzzleReset>(_onPuzzleReset);
   }
 
-  final int _size;
-
-  late final int randomSeed;
-
-  void _onPuzzleInitialized(
-    PuzzleInitialized event,
+  /// NOTE: pass in the same randomSeed to get the same initial puzzle
+  void _onPuzzleSetup(
+    PuzzleSetup event,
     Emitter<PuzzleState> emit,
   ) {
-    randomSeed = event.randomSeed;
-
-    final puzzle = _generatePuzzle(_size, Random(randomSeed),
+    final puzzle = _generatePuzzle(event.size, Random(event.randomSeed),
         shuffle: event.shufflePuzzle);
     emit(
       PuzzleState(
@@ -76,17 +70,6 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
         state.copyWith(tileMovementStatus: TileMovementStatus.cannotBeMoved),
       );
     }
-  }
-
-  // NOTE: reusing random seed so same puzzle is getting generated.
-  void _onPuzzleReset(PuzzleReset event, Emitter<PuzzleState> emit) {
-    final puzzle = _generatePuzzle(_size, Random(randomSeed));
-    emit(
-      PuzzleState(
-        puzzle: puzzle.sort(),
-        numberOfCorrectTiles: puzzle.getNumberOfCorrectTiles(),
-      ),
-    );
   }
 
   /// Build a randomized, solvable puzzle of the given size.
