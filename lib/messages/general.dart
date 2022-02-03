@@ -1,4 +1,15 @@
+import 'package:json_annotation/json_annotation.dart';
+
 import 'dart:convert';
+
+enum MessageType {
+  @JsonValue("CreatePlayer")
+  CreatePlayer,
+  @JsonValue("FindMatch")
+  FindMatch,
+  @JsonValue("MoveTile")
+  MoveTile,
+}
 
 class BaseMessage {
   BaseMessage({
@@ -9,7 +20,7 @@ class BaseMessage {
   });
 
   final int id;
-  final String messageType;
+  final MessageType messageType;
   final Map<String, dynamic> payload;
   final bool valid;
 
