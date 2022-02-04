@@ -9,6 +9,8 @@ enum MessageType {
   FindMatch,
   @JsonValue("MoveTile")
   MoveTile,
+  @JsonValue("ResetPuzzle")
+  ResetPuzzle,
 }
 
 class BaseMessage {
