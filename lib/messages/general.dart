@@ -2,6 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'dart:convert';
 
+part 'general.g.dart';
+
 enum MessageType {
   @JsonValue("CreatePlayer")
   CreatePlayer,
@@ -13,6 +15,7 @@ enum MessageType {
   ResetPuzzle,
 }
 
+@JsonSerializable()
 class BaseMessage {
   BaseMessage({
     required this.id,
@@ -31,17 +34,8 @@ class BaseMessage {
 
   String toRawJson() => json.encode(toJson());
 
-  factory BaseMessage.fromJson(Map<String, dynamic> json) => BaseMessage(
-        id: json["id"],
-        messageType: json["messageType"],
-        payload: json["payload"],
-        valid: json["valid"],
-      );
+  factory BaseMessage.fromJson(Map<String, dynamic> json) =>
+      _$BaseMessageFromJson(json);
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "messageType": messageType,
-        "payload": payload,
-        "valid": valid,
-      };
+  Map<String, dynamic> toJson() => _$BaseMessageToJson(this);
 }

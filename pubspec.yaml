@@ -9,10 +9,12 @@ environment:
 dependencies:
   bloc: ^8.0.1
   equatable: ^2.0.3
-  json_serializable: ^6.1.4
+  json_annotation: ^4.4.0
 
 
 dev_dependencies:
+  build_runner: ^2.1.7
+  json_serializable: ^6.1.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
