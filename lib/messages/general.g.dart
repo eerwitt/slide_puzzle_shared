@@ -25,5 +25,5 @@ const _$MessageTypeEnumMap = {
   MessageType.CreatePlayer: 'CreatePlayer',
   MessageType.FindMatch: 'FindMatch',
   MessageType.MoveTile: 'MoveTile',
-  MessageType.ResetPuzzle: 'ResetPuzzle',
+  MessageType.PuzzleSetup: 'PuzzleSetup',
 };
