@@ -11,8 +11,8 @@ enum MessageType {
   FindMatch,
   @JsonValue("MoveTile")
   MoveTile,
-  @JsonValue("ResetPuzzle")
-  ResetPuzzle,
+  @JsonValue("PuzzleSetup")
+  PuzzleSetup,
 }
 
 @JsonSerializable()
