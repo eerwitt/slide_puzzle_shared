@@ -6,6 +6,16 @@ part of 'general.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+RoundUpdateEvent _$RoundUpdateEventFromJson(Map<String, dynamic> json) =>
+    RoundUpdateEvent(
+      json['playerRank'] as int,
+    );
+
+Map<String, dynamic> _$RoundUpdateEventToJson(RoundUpdateEvent instance) =>
+    <String, dynamic>{
+      'playerRank': instance.playerRank,
+    };
+
 BaseMessage _$BaseMessageFromJson(Map<String, dynamic> json) => BaseMessage(
       id: json['id'] as int,
       messageType: $enumDecode(_$MessageTypeEnumMap, json['messageType']),
@@ -24,6 +34,7 @@ Map<String, dynamic> _$BaseMessageToJson(BaseMessage instance) =>
 const _$MessageTypeEnumMap = {
   MessageType.CreatePlayer: 'CreatePlayer',
   MessageType.FindMatch: 'FindMatch',
-  MessageType.MoveTile: 'MoveTile',
+  MessageType.TileTapped: 'TileTapped',
   MessageType.PuzzleSetup: 'PuzzleSetup',
+  MessageType.RoundUpdate: 'RoundUpdate',
 };
