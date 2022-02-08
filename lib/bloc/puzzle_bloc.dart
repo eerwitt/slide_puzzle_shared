@@ -27,6 +27,7 @@ class PuzzleBloc extends Bloc<PuzzleEvent, PuzzleState> {
     emit(
       PuzzleState(
         puzzle: puzzle.sort(),
+        numberOfMoves: 0,
         numberOfCorrectTiles: puzzle.getNumberOfCorrectTiles(),
       ),
     );
