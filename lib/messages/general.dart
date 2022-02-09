@@ -31,6 +31,21 @@ enum PlayerState {
   winning
 }
 
+enum MessageType {
+  @JsonValue("CreatePlayer")
+  CreatePlayer,
+  @JsonValue("FindMatch")
+  FindMatch,
+  @JsonValue("TileTapped")
+  TileTapped,
+  @JsonValue("PuzzleSetup")
+  PuzzleSetup,
+  @JsonValue("MatchUpdate")
+  MatchUpdate,
+  @JsonValue("RoundUpdate")
+  RoundUpdate,
+}
+
 @JsonSerializable()
 class MatchUpdateEvent extends Equatable {
   const MatchUpdateEvent(
@@ -82,19 +97,6 @@ class RoundUpdateEvent extends Equatable {
       _$RoundUpdateEventFromJson(json);
 
   Map<String, dynamic> toJson() => _$RoundUpdateEventToJson(this);
-}
-
-enum MessageType {
-  @JsonValue("CreatePlayer")
-  CreatePlayer,
-  @JsonValue("FindMatch")
-  FindMatch,
-  @JsonValue("TileTapped")
-  TileTapped,
-  @JsonValue("PuzzleSetup")
-  PuzzleSetup,
-  @JsonValue("RoundUpdate")
-  RoundUpdate,
 }
 
 @JsonSerializable()
