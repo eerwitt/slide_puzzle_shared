@@ -5,14 +5,45 @@ import 'dart:convert';
 
 part 'general.g.dart';
 
+enum GameState {
+  @JsonValue("Lobby")
+  Lobby,
+  @JsonValue("PreGame")
+  PreGame,
+  @JsonValue("InGame")
+  InGame,
+  @JsonValue("PostGame")
+  PostGame,
+}
+
+enum PlayerState {
+  @JsonValue("None")
+  None,
+  @JsonValue("Joined")
+  Joined,
+  @JsonValue("Waiting")
+  Waiting,
+  @JsonValue("Lost")
+  Lost,
+  @JsonValue("Quit")
+  quit,
+  @JsonValue("Winning")
+  winning
+}
+
 @JsonSerializable()
 class RoundUpdateEvent extends Equatable {
-  const RoundUpdateEvent(this.playerRank);
+  const RoundUpdateEvent(
+      this.playerRank, this.secondsRemaining, this.gameState, this.playerState);
 
   final int playerRank;
+  final int secondsRemaining;
+  final GameState gameState;
+  final PlayerState playerState;
 
   @override
-  List<Object> get props => [playerRank];
+  List<Object> get props =>
+      [playerRank, secondsRemaining, gameState, playerState];
 
   factory RoundUpdateEvent.fromRawJson(String str) =>
       RoundUpdateEvent.fromJson(json.decode(str));
