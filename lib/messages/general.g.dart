@@ -70,5 +70,6 @@ const _$MessageTypeEnumMap = {
   MessageType.FindMatch: 'FindMatch',
   MessageType.TileTapped: 'TileTapped',
   MessageType.PuzzleSetup: 'PuzzleSetup',
+  MessageType.MatchUpdate: 'MatchUpdate',
   MessageType.RoundUpdate: 'RoundUpdate',
 };
