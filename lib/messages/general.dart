@@ -33,17 +33,25 @@ enum PlayerState {
 
 @JsonSerializable()
 class RoundUpdateEvent extends Equatable {
-  const RoundUpdateEvent(
-      this.playerRank, this.secondsRemaining, this.gameState, this.playerState);
+  const RoundUpdateEvent(this.playerRank, this.secondsRemaining, this.gameState,
+      this.playerState, this.currentRound, this.numberOfRounds);
 
   final int playerRank;
   final int secondsRemaining;
+  final int currentRound;
+  final int numberOfRounds;
   final GameState gameState;
   final PlayerState playerState;
 
   @override
-  List<Object> get props =>
-      [playerRank, secondsRemaining, gameState, playerState];
+  List<Object> get props => [
+        playerRank,
+        secondsRemaining,
+        currentRound,
+        numberOfRounds,
+        gameState,
+        playerState
+      ];
 
   factory RoundUpdateEvent.fromRawJson(String str) =>
       RoundUpdateEvent.fromJson(json.decode(str));
