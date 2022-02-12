@@ -14,6 +14,8 @@ enum GameState {
   InGame,
   @JsonValue("PostGame")
   PostGame,
+  @JsonValue("GameOver")
+  GameOver,
 }
 
 enum PlayerState {
@@ -26,9 +28,11 @@ enum PlayerState {
   @JsonValue("Lost")
   Lost,
   @JsonValue("Quit")
-  quit,
+  Quit,
   @JsonValue("Winning")
-  winning
+  Winning,
+  @JsonValue("Won")
+  Won,
 }
 
 enum MessageType {
@@ -44,15 +48,42 @@ enum MessageType {
   MatchUpdate,
   @JsonValue("RoundUpdate")
   RoundUpdate,
+  @JsonValue("HealthCheck")
+  HealthCheck,
+}
+
+@JsonSerializable()
+class HealthCheckEvent extends Equatable {
+  const HealthCheckEvent();
+
+  @override
+  List<Object> get props => [];
+
+  factory HealthCheckEvent.fromRawJson(String str) =>
+      HealthCheckEvent.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory HealthCheckEvent.fromJson(Map<String, dynamic> json) =>
+      _$HealthCheckEventFromJson(json);
+
+  Map<String, dynamic> toJson() => _$HealthCheckEventToJson(this);
 }
 
 @JsonSerializable()
 class MatchUpdateEvent extends Equatable {
   const MatchUpdateEvent(
-      this.currentRound, this.numberOfRounds, this.gameState, this.playerState);
+      this.currentRound,
+      this.numberOfRounds,
+      this.secondsRemainingInCurrentState,
+      this.playersConnected,
+      this.gameState,
+      this.playerState);
 
   final int currentRound;
   final int numberOfRounds;
+  final int secondsRemainingInCurrentState;
+  final int playersConnected;
   final GameState gameState;
   final PlayerState playerState;
 
@@ -60,6 +91,8 @@ class MatchUpdateEvent extends Equatable {
   List<Object> get props => [
         currentRound,
         numberOfRounds,
+        secondsRemainingInCurrentState,
+        playersConnected,
         gameState,
         playerState,
       ];
@@ -77,14 +110,17 @@ class MatchUpdateEvent extends Equatable {
 
 @JsonSerializable()
 class RoundUpdateEvent extends Equatable {
-  const RoundUpdateEvent(this.playerRank, this.secondsRemaining);
+  const RoundUpdateEvent(
+      this.playerRank, this.currentScore, this.secondsRemaining);
 
   final int secondsRemaining;
   final int playerRank;
+  final int currentScore;
 
   @override
   List<Object> get props => [
         playerRank,
+        currentScore,
         secondsRemaining,
       ];
 
