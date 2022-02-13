@@ -21,6 +21,10 @@ enum GameState {
 enum PlayerState {
   @JsonValue("None")
   None,
+  @JsonValue("Connecting")
+  Connecting,
+  @JsonValue("Disconnecting")
+  Disconnecting,
   @JsonValue("Joined")
   Joined,
   @JsonValue("Waiting")

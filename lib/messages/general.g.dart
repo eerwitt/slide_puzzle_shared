@@ -42,6 +42,8 @@ const _$GameStateEnumMap = {
 
 const _$PlayerStateEnumMap = {
   PlayerState.None: 'None',
+  PlayerState.Connecting: 'Connecting',
+  PlayerState.Disconnecting: 'Disconnecting',
   PlayerState.Joined: 'Joined',
   PlayerState.Waiting: 'Waiting',
   PlayerState.Lost: 'Lost',
