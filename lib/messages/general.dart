@@ -54,6 +54,8 @@ enum MessageType {
   RoundUpdate,
   @JsonValue("HealthCheck")
   HealthCheck,
+  @JsonValue("StartMatch")
+  StartMatch,
 }
 
 @JsonSerializable()
@@ -72,6 +74,24 @@ class HealthCheckEvent extends Equatable {
       _$HealthCheckEventFromJson(json);
 
   Map<String, dynamic> toJson() => _$HealthCheckEventToJson(this);
+}
+
+@JsonSerializable()
+class StartMatchEvent extends Equatable {
+  const StartMatchEvent();
+
+  @override
+  List<Object> get props => [];
+
+  factory StartMatchEvent.fromRawJson(String str) =>
+      StartMatchEvent.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory StartMatchEvent.fromJson(Map<String, dynamic> json) =>
+      _$StartMatchEventFromJson(json);
+
+  Map<String, dynamic> toJson() => _$StartMatchEventToJson(this);
 }
 
 @JsonSerializable()

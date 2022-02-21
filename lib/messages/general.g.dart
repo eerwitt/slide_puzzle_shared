@@ -12,6 +12,12 @@ HealthCheckEvent _$HealthCheckEventFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$HealthCheckEventToJson(HealthCheckEvent instance) =>
     <String, dynamic>{};
 
+StartMatchEvent _$StartMatchEventFromJson(Map<String, dynamic> json) =>
+    StartMatchEvent();
+
+Map<String, dynamic> _$StartMatchEventToJson(StartMatchEvent instance) =>
+    <String, dynamic>{};
+
 MatchUpdateEvent _$MatchUpdateEventFromJson(Map<String, dynamic> json) =>
     MatchUpdateEvent(
       json['currentRound'] as int,
@@ -89,4 +95,5 @@ const _$MessageTypeEnumMap = {
   MessageType.MatchUpdate: 'MatchUpdate',
   MessageType.RoundUpdate: 'RoundUpdate',
   MessageType.HealthCheck: 'HealthCheck',
+  MessageType.StartMatch: 'StartMatch',
 };
