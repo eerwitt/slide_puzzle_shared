@@ -134,17 +134,19 @@ class MatchUpdateEvent extends Equatable {
 
 @JsonSerializable()
 class RoundUpdateEvent extends Equatable {
-  const RoundUpdateEvent(
-      this.playerRank, this.currentScore, this.secondsRemaining);
+  const RoundUpdateEvent(this.playerRank, this.currentScore,
+      this.playersToMoveOn, this.secondsRemaining);
 
   final int secondsRemaining;
   final int playerRank;
+  final int playersToMoveOn;
   final int currentScore;
 
   @override
   List<Object> get props => [
         playerRank,
         currentScore,
+        playersToMoveOn,
         secondsRemaining,
       ];
 

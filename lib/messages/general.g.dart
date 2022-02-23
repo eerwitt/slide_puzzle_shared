@@ -62,6 +62,7 @@ RoundUpdateEvent _$RoundUpdateEventFromJson(Map<String, dynamic> json) =>
     RoundUpdateEvent(
       json['playerRank'] as int,
       json['currentScore'] as int,
+      json['playersToMoveOn'] as int,
       json['secondsRemaining'] as int,
     );
 
@@ -69,6 +70,7 @@ Map<String, dynamic> _$RoundUpdateEventToJson(RoundUpdateEvent instance) =>
     <String, dynamic>{
       'secondsRemaining': instance.secondsRemaining,
       'playerRank': instance.playerRank,
+      'playersToMoveOn': instance.playersToMoveOn,
       'currentScore': instance.currentScore,
     };
 
